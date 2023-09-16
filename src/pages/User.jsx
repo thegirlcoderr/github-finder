@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import GithubContext from '../context/github/GithubContext';
 import { useParams } from 'react-router-dom';
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
@@ -103,12 +103,8 @@ function User() {
                 <div className="stat">
                   <div className="stat-title text-md">Website</div>
                   <div className="text-lg stat-value">
-                    <a
-                      href={`https://${blog}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {blog}
+                    <a href={websiteUrl} target="_blank" rel="noreferrer">
+                      {websiteUrl}
                     </a>
                   </div>
                 </div>
