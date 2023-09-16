@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import GithubContext from '../context/github/GithubContext';
 import { useParams } from 'react-router-dom';
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
@@ -10,7 +10,6 @@ import { getUserAndRepos } from '../context/github/GithubActions';
 function User() {
   const { user, loading, dispatch, repos } = useContext(GithubContext);
   const params = useParams();
-
   useEffect(() => {
     dispatch({ type: 'SET_LOADING' });
     const getUserData = async () => {
@@ -20,6 +19,10 @@ function User() {
 
     getUserData();
   }, [dispatch, params.login]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   const {
     name,
@@ -36,11 +39,11 @@ function User() {
     public_repos,
     public_gists,
     hireable,
-  } = user;
+  } = user.user;
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // NOTE: check for valid url to users website
+
+  const websiteUrl = blog?.startsWith('http') ? blog : 'https://' + blog;
 
   return (
     <>
